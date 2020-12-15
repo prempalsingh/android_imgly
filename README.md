@@ -13,11 +13,11 @@ We need some simple Layout here, use an xml layout or code to create it:
 
 
 # Requirements 
-  Must have features
-    * The result should be drawn in original Size, not in screen size!
-      You can ignore OutOfMemory issues here. If you have problems just use some smaller image for testing.
+Must have features
+  * The result should be drawn in original Size, not in screen size!
+    You can ignore OutOfMemory issues here. If you have problems just use some smaller image for testing.
 
 # Things to consider
-  Nice to have features, but keep your code open to implement this later
-    * The user can make mistakes, so a history (undo redo) would be nice.
-    * The image usually doesn't change while brushing, but can be replaced in size. (Small preview, highres rendering)
+Nice to have features, but keep your code open to implement this later
+  * The user can make mistakes, so a history (undo redo) would be nice.
+  * The image usually doesn't change while brushing, but can be replaced in size. (Small preview, highres rendering)
