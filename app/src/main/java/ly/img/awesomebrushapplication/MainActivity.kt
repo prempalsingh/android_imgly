@@ -1,8 +1,13 @@
 package ly.img.awesomebrushapplication
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import androidx.annotation.ColorInt
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
@@ -43,26 +48,36 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    fun onPressLoadImage() {
-        TODO("load image on background thread.")
+    private fun onPressLoadImage() {
+        val intent = Intent(Intent.ACTION_PICK)
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT) {
+            intent.type = "image/*"
+        } else {
+            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+        }
+        startActivityForResult(intent, GALLERY_INTENT_RESULT)
+    }
+
+    private fun handleGalleryImage(uri:Uri) {
         // Adjust Size of the drawable area, after image loading.
+
     }
 
     @MainThread
-    fun onPressSave() {
+    private fun onPressSave() {
         TODO("saveBrushToGallery() on background thread.")
     }
 
-    fun onChangeColor(@ColorInt color:Int) {
+    private fun onChangeColor(@ColorInt color:Int) {
         // ColorInt (8bit) Color is ok, do not wast time here.
     }
 
-    fun onSizeChanged(size:Float) {
+    private fun onSizeChanged(size:Float) {
 
     }
 
     @WorkerThread
-    fun saveBrushToGallery() {
+    private fun saveBrushToGallery() {
         // Do not worry about memory there. (do not waste time it's another story)
         // ...simply use only test images that fit's in the memory.
 
@@ -73,5 +88,21 @@ class MainActivity : AppCompatActivity() {
         outputStream.use {
             bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream)
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (data != null && requestCode == GALLERY_INTENT_RESULT && ) {
+            val uri = data.data
+            if (uri != null) {
+                handleGalleryImage(uri)
+            }
+        }
+
+    }
+
+    companion object {
+        const val GALLERY_INTENT_RESULT = 0
     }
 }
