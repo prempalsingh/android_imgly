@@ -33,15 +33,20 @@ class BrushCanvas @JvmOverloads constructor(context: Context?, attrs: AttributeS
 
         // You could use this algorithm.
 
-        val isFirstPoint = TODO()
-        if (firstPoint) {
-            val point = TODO("First point")
+        data class DummyPosType(
+            var x:Float = 0.0f,
+            var y:Float = 0.0f
+        )
+
+        val isFirstPoint: Boolean = TODO()
+        if (isFirstPoint) {
+            val point: DummyPosType = TODO("First point")
             path.moveTo(point.x, point.y)
-        } else if (pointCount > 1) {
-            val point = TODO("Current point to draw. (The point before the last)")
-            val lastPoint = TODO("The point before `point`")
-            val nextPoint = TODO("Next Point to draw (Last you get from onTouchEvent) or null if it is the last")
-            val beforeLastPoint = TODO("The point before lastPoint or lastPoint if there is not point before it.")
+        } else {
+            val point: DummyPosType = TODO("Current point to draw. (The point before the last)")
+            val lastPoint: DummyPosType = TODO("The point before `point`")
+            val nextPoint: DummyPosType = TODO("Next Point to draw (Last you get from onTouchEvent) or null if it is the last")
+            val beforeLastPoint: DummyPosType = TODO("The point before lastPoint or lastPoint if there is not point before it.")
 
             val pointDx: Float
             val pointDy: Float
