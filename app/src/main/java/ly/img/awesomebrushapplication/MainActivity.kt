@@ -93,7 +93,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (data != null && requestCode == GALLERY_INTENT_RESULT && ) {
+        if (data != null && resultCode == Activity.RESULT_OK && requestCode == GALLERY_INTENT_RESULT) {
             val uri = data.data
             if (uri != null) {
                 handleGalleryImage(uri)

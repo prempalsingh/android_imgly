@@ -9,7 +9,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
 
-class BrushCanvas @JvmOverloads constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : View(context, attrs, defStyleAttr) {
+class BrushCanvas @JvmOverloads constructor(context: Context?, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
     init {
         setWillNotDraw(false)
     }
@@ -21,11 +21,10 @@ class BrushCanvas @JvmOverloads constructor(context: Context?, attrs: AttributeS
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         return super.onTouchEvent(event)
-        TODO("Implement touch.")
-
+        // TODO: Implement touch.
     }
 
-    override fun updatePath() {
+    fun updatePath() {
         // The brush should be drawn smooth this means:
         // 1. You have to draw one point in past.
         // 2. The last point must be drawn after leaving your finger
@@ -75,10 +74,24 @@ class BrushCanvas @JvmOverloads constructor(context: Context?, attrs: AttributeS
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
-        brushStrokePaint.color = Color.WHITE
+        // TODO: This is only an example code how drawing in general works.
 
-        // If there is time left, try to implement a cache and draw only the last line instead of everything.
+        val w = width.toFloat()
+        val h = height.toFloat()
+
+        brushStrokePaint.color = Color.BLACK
+        brushStrokePaint.strokeWidth = 10.0f
+
+        path.reset()
+        path.moveTo(w * 0.1f, h * 0.1f)
+        path.lineTo(w * 0.9f, h * 0.25f)
+        path.lineTo(w * 0.1f, h * 0.5f)
+        path.lineTo(w * 0.9f, h * 0.75f)
+        path.lineTo(w * 0.1f, h * 0.9f)
+
+        // TODO: If there is time left, try to implement a cache and draw only the last line instead of everything.
         canvas?.drawPath(path, brushStrokePaint)
+
     }
 
     companion object {
