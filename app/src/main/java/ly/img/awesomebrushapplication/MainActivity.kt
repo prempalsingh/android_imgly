@@ -21,28 +21,31 @@ class MainActivity : AppCompatActivity() {
 
           == Layout ==
 
-            We need some simple Layout here, use an xml layout or code to create it:
-              * Load Image -> Select Image from Gallery.
-              * Save Image -> Save Image to Gallery.
-              * Color -> A Simply selector where you can select at min. 5 Colors. More Color's or a color-picker is also welcome.
-              * Size -> Adjust brush size with a slider
-              * Clear all -> Removes the Brush.
+            We require a very simple layout here and you can use an XML layout or code to create it:
+              * Load Image -> Load an image from the gallery and display it on screen.
+              * Save Image -> Save the final image to the gallery.
+              * Color -> Let the user select a color from a list of colors.
+              * Size -> Let the user specify the radius of a stroke via a slider.
+              * Clear all -> Let the user remove all strokes from the image to start over.
 
           ----------------------------------------------------------------------
          | HINT: The layout doesn't have to look good, but it should be usable. |
           ----------------------------------------------------------------------
 
           == Requirements ==
-            Must have features
-              * The result should be drawn in original Size, not in screen size!
-                You can ignore OutOfMemory issues here, just use some smaller Image
-
-              *
+              * Your drawing must be applied to the original image, not the downscaled preview. That means that 
+                your brush must work in image coordinates instead of view coordinates and the saved image must have 
+                the same resolution as the originally loaded image.
+              * You can ignore OutOfMemory issues. If you run into memory issues just use a smaller image for testing.
 
           == Things to consider ==
-            Nice to have features, but keep you code open to implement this later
-              * The user can make mistakes, so a history (undo redo) would be nice.
-              * The image usually doesn't change while editing, but can be replaced in size.
+            These features would be nice to have. Structure your program in such a way, that it could be added afterwards 
+            easily. If you have time left, feel free to implement it already.
+
+              * The user can make mistakes, so a history (undo/redo) would be nice.
+              * The image usually doesn't change while brushing, but can be replaced with a higher resolution variant. A 
+                common scenario would be a small preview but a high-resolution final rendering. Keep this in mind when 
+                creating your data structures.
          */
 
 
@@ -59,17 +62,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleGalleryImage(uri:Uri) {
-        // Adjust Size of the drawable area, after image loading.
+        // Adjust size of the drawable area, after loading the image.
 
     }
 
     @MainThread
     private fun onPressSave() {
-        TODO("saveBrushToGallery() on background thread.")
+        TODO("saveBrushToGallery() on a background thread.")
     }
 
     private fun onChangeColor(@ColorInt color:Int) {
-        // ColorInt (8bit) Color is ok, do not wast time here.
+        // ColorInt (8bit) color is ok, do not waste time here.
     }
 
     private fun onSizeChanged(size:Float) {
@@ -78,13 +81,13 @@ class MainActivity : AppCompatActivity() {
 
     @WorkerThread
     private fun saveBrushToGallery() {
-        // Do not worry about memory there. (do not waste time it's another story)
-        // ...simply use only test images that fit's in the memory.
+        // Do not worry about memory here.
+        // ... instead just use only test images that fit into the available memory.
 
-        // Because it can take some time to create the brush, it would be nice to have a progress here.
+        // Because it can take some time to create the brush, it would be nice to indicate progress here, but only if you have time left.
 
-        val bitmap: Bitmap = TODO("Create in Size of original image, not in Screen size!")
-        val outputStream :OutputStream = TODO("Open an ScopedStorage OutputStream and save it in user gallery.")
+        val bitmap: Bitmap = TODO("Create in size of original image, not in screen size!")
+        val outputStream :OutputStream = TODO("Open a ScopedStorage OutputStream and save it in the user's gallery.")
         outputStream.use {
             bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream)
         }
