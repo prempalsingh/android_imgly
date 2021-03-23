@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Awesome Brush Application</string>
+    <string name="load_image">Load Image</string>
+    <string name="save_image">Save Image</string>
 </resources>

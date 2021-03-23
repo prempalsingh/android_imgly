@@ -5,18 +5,41 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
+import android.widget.Button
 import androidx.annotation.ColorInt
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
+import androidx.appcompat.app.AppCompatActivity
+import ly.img.awesomebrushapplication.view.BrushCanvas
 import java.io.OutputStream
 
 class MainActivity : AppCompatActivity() {
+
+    private val TAG = MainActivity::class.simpleName
+
+    private lateinit var canvas: BrushCanvas
+    private lateinit var loadImageButton: Button
+    private lateinit var saveImageButton: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        loadImageButton = findViewById(R.id.btn_load_image)
+        saveImageButton = findViewById(R.id.btn_save_image)
+        canvas = findViewById(R.id.canvas)
+
+        loadImageButton.setOnClickListener {
+            onPressLoadImage()
+        }
+
+        saveImageButton.setOnClickListener {
+            onPressSave()
+        }
+
         /*
 
           == Layout ==
@@ -61,9 +84,10 @@ class MainActivity : AppCompatActivity() {
         startActivityForResult(intent, GALLERY_INTENT_RESULT)
     }
 
-    private fun handleGalleryImage(uri:Uri) {
+    private fun handleGalleryImage(uri: Uri) {
         // Adjust size of the drawable area, after loading the image.
-
+        Log.d(TAG, "handleGalleryImage: $uri")
+        canvas.loadImage(uri)
     }
 
     @MainThread
@@ -71,11 +95,11 @@ class MainActivity : AppCompatActivity() {
         TODO("saveBrushToGallery() on a background thread.")
     }
 
-    private fun onChangeColor(@ColorInt color:Int) {
+    private fun onChangeColor(@ColorInt color: Int) {
         // ColorInt (8bit) color is ok, do not waste time here.
     }
 
-    private fun onSizeChanged(size:Float) {
+    private fun onSizeChanged(size: Float) {
 
     }
 
@@ -87,7 +111,8 @@ class MainActivity : AppCompatActivity() {
         // Because it can take some time to create the brush, it would be nice to indicate progress here, but only if you have time left.
 
         val bitmap: Bitmap = TODO("Create in size of original image, not in screen size!")
-        val outputStream :OutputStream = TODO("Open a ScopedStorage OutputStream and save it in the user's gallery.")
+        val outputStream: OutputStream =
+            TODO("Open a ScopedStorage OutputStream and save it in the user's gallery.")
         outputStream.use {
             bitmap.compress(Bitmap.CompressFormat.PNG, 0, outputStream)
         }

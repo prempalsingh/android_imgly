@@ -6,6 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ly.img.awesomebrushapplication.view.BrushCanvas android:layout_height="match_parent" android:layout_width="match_parent" />
+    <ly.img.awesomebrushapplication.view.BrushCanvas
+        android:id="@+id/canvas"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_load_image" />
+
+    <Button
+        android:id="@+id/btn_load_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/load_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_save_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_image"
+        app:layout_constraintStart_toEndOf="@+id/btn_load_image"
+        app:layout_constraintTop_toTopOf="@+id/btn_load_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

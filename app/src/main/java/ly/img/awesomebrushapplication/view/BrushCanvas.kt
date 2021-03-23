@@ -1,19 +1,19 @@
 package ly.img.awesomebrushapplication.view
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Path
+import android.graphics.*
+import android.net.Uri
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import ly.img.awesomebrushapplication.decodeSampledBitmapFromResource
 
 class BrushCanvas @JvmOverloads constructor(context: Context?, attrs: AttributeSet? = null, defStyleAttr: Int = 0) : View(context, attrs, defStyleAttr) {
     init {
         setWillNotDraw(false)
     }
 
+    private var bitmap: Bitmap? = null
     private val brushStrokePaint = Paint().also {
         it.style = Paint.Style.STROKE
     }
@@ -88,22 +88,27 @@ class BrushCanvas @JvmOverloads constructor(context: Context?, attrs: AttributeS
 
         // TODO: This is only an example code how drawing works in general.
 
-        val w = width.toFloat()
-        val h = height.toFloat()
-
-        brushStrokePaint.color = Color.BLACK
-        brushStrokePaint.strokeWidth = 10.0f
-
-        path.reset()
-        path.moveTo(w * 0.1f, h * 0.1f)
-        path.lineTo(w * 0.9f, h * 0.25f)
-        path.lineTo(w * 0.1f, h * 0.5f)
-        path.lineTo(w * 0.9f, h * 0.75f)
-        path.lineTo(w * 0.1f, h * 0.9f)
+//        val w = width.toFloat()
+//        val h = height.toFloat()
+//
+//        brushStrokePaint.color = Color.BLACK
+//        brushStrokePaint.strokeWidth = 10.0f
+//
+//        path.reset()
+//        path.moveTo(w * 0.1f, h * 0.1f)
+//        path.lineTo(w * 0.9f, h * 0.25f)
+//        path.lineTo(w * 0.1f, h * 0.5f)
+//        path.lineTo(w * 0.9f, h * 0.75f)
+//        path.lineTo(w * 0.1f, h * 0.9f)
 
         // TODO: If there is time left, try to implement a cache and draw only the last line instead of everything.
-        canvas?.drawPath(path, brushStrokePaint)
+//        canvas?.drawPath(path, brushStrokePaint)
+        bitmap?.let { canvas?.drawBitmap(it, 0f, 0f, null) }
 
+    }
+
+    fun loadImage(uri: Uri) {
+        bitmap = decodeSampledBitmapFromResource(context, uri, width, height)
     }
 
     companion object {
