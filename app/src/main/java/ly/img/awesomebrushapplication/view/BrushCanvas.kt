@@ -9,7 +9,7 @@ import android.net.Uri
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
-import ly.img.awesomebrushapplication.decodeSampledBitmapFromResource
+import ly.img.awesomebrushapplication.decodeSampledBitmap
 import ly.img.awesomebrushapplication.model.Brush
 import ly.img.awesomebrushapplication.model.DrawPoint
 import ly.img.awesomebrushapplication.model.Stroke
@@ -20,6 +20,7 @@ class BrushCanvas @JvmOverloads constructor(context: Context?, attrs: AttributeS
         setWillNotDraw(false)
     }
 
+    //todo: set these from activity
     var strokeColor = Color.BLUE
     var strokeSize = 10
 
@@ -65,6 +66,7 @@ class BrushCanvas @JvmOverloads constructor(context: Context?, attrs: AttributeS
     }
 
     fun loadImage(uri: Uri) {
-        bitmap = decodeSampledBitmapFromResource(context, uri, width, height)
+        //todo: this should happen on background thread
+        bitmap = decodeSampledBitmap(context, uri, width, height)
     }
 }

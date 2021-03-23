@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 
 
-fun decodeSampledBitmapFromResource(
+fun decodeSampledBitmap(
     context: Context,
     uri: Uri,
     reqWidth: Int,
